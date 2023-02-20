@@ -4,18 +4,43 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from './style';
 
 const Header = () => {
+  // const newsIcon = require('.');
+
   return (
     <React.Fragment>
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/images/logo-x.png')}
-          style={styles.logoImage}
-        />
-        <Image
-          source={require('../../assets/images/logo-x.png')}
-          style={styles.logoImage}
-        />
-        <Text>asdfasdfasd</Text>
+        <View>
+          <Image
+            source={require('../../assets/images/logo-x.png')}
+            style={styles.logoImage}
+          />
+        </View>
+        <View style={styles.rightIcons}>
+          <Image
+            source={require('../../assets/images/trending-topic.png')}
+            style={styles.headerIcons}
+          />
+          <Image
+            source={require('../../assets/images/newsIcon.png')}
+            style={styles.headerIcons}
+          />
+          <Image
+            source={require('../../assets/images/myTVicon.png')}
+            style={styles.headerIcons}
+          />
+          <Image
+            source={require('../../assets/images/receiver.png')}
+            style={styles.headerIcons}
+          />
+          <Image
+            source={require('../../assets/images/MyMusic.png')}
+            style={styles.headerIcons}
+          />
+          <Image
+            source={require('../../assets/images/Snap.png')}
+            style={styles.headerIcons}
+          />
+        </View>
       </View>
       <LinearGradient
         start={{x: 0, y: 1}}

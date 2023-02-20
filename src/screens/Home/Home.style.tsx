@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -6,8 +6,8 @@ export default StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 10,
   },
-  SafeAreaView1: { backgroundColor: '#FFF', flex: 0 },
-  SafeAreaView2: { flex: 1, backgroundColor: '#181818' },
+  SafeAreaView1: {backgroundColor: '#FFF', flex: 0},
+  SafeAreaView2: {flex: 1, backgroundColor: '#181818'},
   outerWrapper: {
     flex: 1,
     alignItems: 'center',
@@ -21,5 +21,5 @@ export default StyleSheet.create({
     borderColor: '#F0F0F0',
     borderRadius: 10,
   },
-  text: { fontSize: 18, color: '#808080', fontWeight: 'bold' },
+  text: {fontSize: 18, color: '#808080', fontWeight: 'bold'},
 });

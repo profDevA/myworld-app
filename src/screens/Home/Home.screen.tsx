@@ -21,18 +21,7 @@ const Home = ({navigation}: any) => {
     <SafeAreaView style={styles.SafeAreaView2}>
       <Header />
       <View style={styles.outerWrapper}>
-        <Icon name={'ios-person'} size={100} color={'purple'} />
-        <Icon name={'ios-home'} size={100} color={'purple'} />
-
-        <View>
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => dispatch(fetchUser())}>
-            <Text style={styles.text}>
-              click me Click here to show User data: click again again
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <View></View>
       </View>
     </SafeAreaView>
   );
