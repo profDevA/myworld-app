@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {fetchUser, selectAll} from '../../stores/user.reducer';
 import {useAppDispatch, useAppSelector} from '../../hooks/redux';
 import Header from '../../components/Header';
+import HomeBanner from '../../components/HomeBanner';
 
 const Home = ({navigation}: any) => {
   const dispatch = useAppDispatch();
@@ -20,9 +21,7 @@ const Home = ({navigation}: any) => {
   return (
     <SafeAreaView style={styles.SafeAreaView2}>
       <Header />
-      <View style={styles.outerWrapper}>
-        <View></View>
-      </View>
+      <HomeBanner />
     </SafeAreaView>
   );
 };

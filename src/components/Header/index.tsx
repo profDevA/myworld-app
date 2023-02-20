@@ -4,7 +4,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from './style';
 
 const Header = () => {
-  // const newsIcon = require('.');
+  const gradColors = [
+    'blue',
+    '#FB47FF',
+    '#F9007C',
+    '#FF2828',
+    'yellow',
+    '#4AFF47',
+    '#00F4F0',
+  ];
 
   return (
     <React.Fragment>
@@ -45,15 +53,7 @@ const Header = () => {
       <LinearGradient
         start={{x: 0, y: 1}}
         end={{x: 1, y: 1}}
-        colors={[
-          'blue',
-          '#FB47FF',
-          '#F9007C',
-          '#FF2828',
-          'yellow',
-          '#4AFF47',
-          '#00F4F0',
-        ]}
+        colors={gradColors}
         style={styles.lineRainbow}
       />
     </React.Fragment>
