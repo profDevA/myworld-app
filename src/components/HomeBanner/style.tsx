@@ -20,13 +20,15 @@ export default StyleSheet.create({
   },
   bannerTopTextLeft: {
     color: 'white',
-    fontFamily: '"helvetica neue",helvetica,arial,sans-serif',
+    fontFamily: 'arial,sans-serif',
+    // fontFamily: '"helvetica neue",helvetica,arial,sans-serif',
     fontSize: 32,
   },
   bannerTopTextRight: {
     color: 'white',
     fontSize: 20,
-    fontFamily: '"helvetica neue",helvetica,arial,sans-serif',
+    // fontFamily: '"helvetica neue",helvetica,arial,sans-serif',
+    fontFamily: 'arial,sans-serif',
   },
   bannerBottomTextWrap: {},
   bannerBottomText: {
