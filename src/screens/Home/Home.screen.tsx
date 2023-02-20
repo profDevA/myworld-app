@@ -6,6 +6,8 @@ import {useAppDispatch, useAppSelector} from '../../hooks/redux';
 import Header from '../../components/Header';
 import HomeBanner from '../../components/HomeBanner';
 import BestSellors from '../../components/BestSellors';
+import Magazines from '../../components/Magazines';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const Home = ({navigation}: any) => {
   const dispatch = useAppDispatch();
@@ -14,8 +16,11 @@ const Home = ({navigation}: any) => {
   return (
     <SafeAreaView style={styles.SafeAreaView2}>
       <Header />
-      <HomeBanner />
-      <BestSellors />
+      <ScrollView>
+        <HomeBanner />
+        <BestSellors />
+        <Magazines />
+      </ScrollView>
     </SafeAreaView>
   );
 };

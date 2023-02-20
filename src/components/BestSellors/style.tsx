@@ -9,7 +9,6 @@ export default StyleSheet.create({
   item: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#fff',
     paddingHorizontal: 5,
   },
   itemImage: {
