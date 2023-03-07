@@ -22,7 +22,7 @@ export default StyleSheet.create({
     width: 320,
     height: 50,
     fontSize: 30,
-    fontFamily: 'Chewy',
+    // fontFamily: 'Chewy',
     color: '#FFF',
     textAlign: 'center',
     padding: 0,
@@ -52,7 +52,7 @@ export default StyleSheet.create({
   },
   createAccountButton: {
     position: 'absolute',
-    top: 20,
+    top: 40,
     left: 10,
     width: 200,
     height: 60,
@@ -64,7 +64,7 @@ export default StyleSheet.create({
   },
   howToUseButton: {
     position: 'absolute',
-    top: 40,
+    top: 70,
     right: 20,
     width: 200,
     height: 60,
@@ -77,7 +77,7 @@ export default StyleSheet.create({
   forgotPassword: {
     position: 'relative',
     marginBottom: 20,
-    left: -50,
+    left: -30,
     transform: [
       {
         rotate: '-10deg',
@@ -89,7 +89,7 @@ export default StyleSheet.create({
     height: 80,
   },
   dontHaveAccount: {
-    right: -80,
+    right: -50,
     transform: [
       {
         rotate: '10deg',

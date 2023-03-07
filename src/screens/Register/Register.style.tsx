@@ -21,7 +21,7 @@ export default StyleSheet.create({
     width: 320,
     height: 50,
     fontSize: 30,
-    fontFamily: 'Chewy',
+    // fontFamily: 'Chewy',
     color: '#FFF',
     textAlign: 'center',
     padding: 0,

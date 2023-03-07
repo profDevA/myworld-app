@@ -20,7 +20,7 @@ export default StyleSheet.create({
   },
   bannerTopTextLeft: {
     color: 'white',
-    fontFamily: 'arial,sans-serif',
+    // fontFamily: 'arial,sans-serif',
     // fontFamily: '"helvetica neue",helvetica,arial,sans-serif',
     fontSize: 32,
   },
@@ -28,13 +28,13 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: 20,
     // fontFamily: '"helvetica neue",helvetica,arial,sans-serif',
-    fontFamily: 'arial,sans-serif',
+    // fontFamily: 'arial,sans-serif',
   },
   bannerBottomTextWrap: {},
   bannerBottomText: {
     color: 'white',
     fontSize: 48,
-    fontFamily: 'VT323',
+    // fontFamily: 'VT323',
     textAlign: 'center',
   },
   sunnyImage: {

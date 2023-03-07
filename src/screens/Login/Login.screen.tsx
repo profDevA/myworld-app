@@ -28,7 +28,7 @@ const Login = () => {
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
         style={styles.createAccountButton}
-        // onPress={() => navigation.navigate('RegisterScreen')}
+        onPress={() => navigation.navigate('RegisterScreen')}
       >
         <Image
           source={require('../../assets/images/createAccount.png')}
