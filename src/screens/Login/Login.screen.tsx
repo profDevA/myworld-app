@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles from './Login.style';
 import LinearGradient from 'react-native-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
 
 const gradColors = [
   'blue',
@@ -21,9 +22,14 @@ const gradColors = [
 ];
 
 const Login = () => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.createAccountButton}>
+      <TouchableOpacity
+        style={styles.createAccountButton}
+        // onPress={() => navigation.navigate('RegisterScreen')}
+      >
         <Image
           source={require('../../assets/images/createAccount.png')}
           style={styles.createAccountImage}

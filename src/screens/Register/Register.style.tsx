@@ -6,7 +6,6 @@ export default StyleSheet.create({
     backgroundColor: '#222',
     overflow: 'scroll',
     alignItems: 'center',
-    position: 'relative',
   },
   titleWrapper: {
     paddingTop: 100,

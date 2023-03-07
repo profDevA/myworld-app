@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home/Home.screen';
 import Login from '../screens/Login/Login.screen';
+import Register from '../screens/Register/Register.screen';
 import Profile from '../screens/Profile/Profile.screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -50,6 +51,11 @@ const MainNavigation = () => {
           name="LoginScreen"
           options={{headerShown: false}}
           component={Login}
+        />
+        <Stack.Screen
+          name="RegisterScreen"
+          options={{headerShown: false}}
+          component={Register}
         />
       </Stack.Navigator>
     </NavigationContainer>
