@@ -1,5 +1,6 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {Image, Text, View, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './style';
 
@@ -13,15 +14,18 @@ const Header = () => {
     '#4AFF47',
     '#00F4F0',
   ];
+  const naviation = useNavigation();
 
   return (
     <React.Fragment>
       <View style={styles.container}>
         <View>
-          <Image
-            source={require('../../assets/images/logo-x.png')}
-            style={styles.logoImage}
-          />
+          <TouchableOpacity onPress={() => naviation.navigate('LoginScreen')}>
+            <Image
+              source={require('../../assets/images/logo-x.png')}
+              style={styles.logoImage}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.rightIcons}>
           <Image
