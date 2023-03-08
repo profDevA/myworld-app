@@ -26,15 +26,14 @@ const Login = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
-        style={styles.createAccountButton}
-        onPress={() => navigation.navigate('RegisterScreen')}
-      >
-        <Image
-          source={require('../../assets/images/createAccount.png')}
-          style={styles.createAccountImage}
-        />
-      </TouchableOpacity>
+      <View style={styles.createAccountButton}>
+        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
+          <Image
+            source={require('../../assets/images/createAccount.png')}
+            style={styles.createAccountImage}
+          />
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity style={styles.howToUseButton}>
         <Image
           source={require('../../assets/images/howUseMyWorld.png')}

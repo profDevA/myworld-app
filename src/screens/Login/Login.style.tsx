@@ -6,6 +6,7 @@ export default StyleSheet.create({
     backgroundColor: '#222',
     overflow: 'scroll',
     alignItems: 'center',
+    justifyContent: 'center',
     position: 'relative',
   },
   titleWrapper: {
@@ -61,6 +62,7 @@ export default StyleSheet.create({
         rotate: '-10deg',
       },
     ],
+    zIndex: 100,
   },
   howToUseButton: {
     position: 'absolute',
@@ -73,6 +75,7 @@ export default StyleSheet.create({
         rotate: '10deg',
       },
     ],
+    zIndex: 100,
   },
   forgotPassword: {
     position: 'relative',

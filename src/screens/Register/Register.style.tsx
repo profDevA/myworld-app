@@ -1,112 +1,55 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+
+const HEIGHT = Dimensions.get('window').height;
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#222',
     overflow: 'scroll',
+  },
+  scrollview: {
+    flex: 1,
+  },
+  background: {
+    flex: 1,
+    height: HEIGHT,
+  },
+  content: {
+    padding: 15,
+    paddingTop: 50,
     alignItems: 'center',
   },
-  titleWrapper: {
-    paddingTop: 100,
-    paddingBottom: 30,
-  },
-  titleImage: {
-    width: 250,
-    height: 120,
-    resizeMode: 'contain',
-    borderColor: 'red',
-  },
-  authInput: {
-    width: 320,
-    height: 50,
-    fontSize: 30,
-    // fontFamily: 'Chewy',
-    color: '#FFF',
-    textAlign: 'center',
-    padding: 0,
-    borderRadius: 30,
-    borderColor: '#FFF',
-    borderWidth: 3,
-    marginBottom: 25,
-  },
-  loginButton: {
-    height: 50,
-    borderRadius: 50,
-    marginBottom: 30,
-  },
-  loginText: {
-    color: '#FFF',
-    width: '100%',
-    fontSize: 30,
-    textAlign: 'center',
+  title: {
+    fontSize: 50,
     fontWeight: '700',
-    letterSpacing: 3,
-  },
-  createAccountImage: {
-    width: 200,
-    height: 60,
-    resizeMode: 'contain',
-    padding: 0,
-  },
-  createAccountButton: {
-    position: 'absolute',
-    top: 20,
-    left: 10,
-    width: 200,
-    height: 60,
-    transform: [
-      {
-        rotate: '-10deg',
-      },
-    ],
-  },
-  howToUseButton: {
-    position: 'absolute',
-    top: 40,
-    right: 20,
-    width: 200,
-    height: 60,
-    transform: [
-      {
-        rotate: '10deg',
-      },
-    ],
-  },
-  forgotPassword: {
-    position: 'relative',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: 'black',
     marginBottom: 20,
-    left: -50,
-    transform: [
-      {
-        rotate: '-10deg',
-      },
-    ],
   },
-  forgotPasswordImage: {
-    width: 280,
-    height: 80,
+  textInput: {
+    fontSize: 45,
+    width: '80%',
+    textAlign: 'center',
+    marginBottom: 20,
   },
-  dontHaveAccount: {
-    right: -80,
-    transform: [
-      {
-        rotate: '10deg',
-      },
-    ],
-  },
-  dontHaveAccountImage: {
-    width: 300,
-    height: 80,
-  },
-  backToHome: {
-    position: 'relative',
+  signInTxt: {
+    fontSize: 50,
+    color: 'black',
+    fontWeight: '700',
+    textTransform: 'uppercase',
     marginBottom: 30,
-    left: -10,
-    transform: [
-      {
-        rotate: '-10deg',
-      },
-    ],
+  },
+  back: {
+    flexDirection: 'row',
+  },
+  genderText: {
+    fontSize: 45,
+    textAlign: 'center'
+  },
+  radioGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
   },
 });
