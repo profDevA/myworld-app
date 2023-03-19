@@ -40,10 +40,13 @@ const Header = () => {
             source={require('../../assets/images/myTVicon.png')}
             style={styles.headerIcons}
           />
-          <Image
-            source={require('../../assets/images/receiver.png')}
-            style={styles.headerIcons}
-          />
+          <TouchableOpacity
+            onPress={() => naviation.navigate('MyPodcastMenuScreen')}>
+            <Image
+              source={require('../../assets/images/receiver.png')}
+              style={styles.headerIcons}
+            />
+          </TouchableOpacity>
           <Image
             source={require('../../assets/images/MyMusic.png')}
             style={styles.headerIcons}

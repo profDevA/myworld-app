@@ -34,7 +34,7 @@ export default StyleSheet.create({
   bannerBottomText: {
     color: 'white',
     fontSize: 48,
-    // fontFamily: 'VT323',
+    fontFamily: 'VT323',
     textAlign: 'center',
   },
   sunnyImage: {
