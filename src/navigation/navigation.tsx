@@ -2,11 +2,12 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Home from '../screens/Home/Home.screen';
 import Login from '../screens/Login/Login.screen';
 import Register from '../screens/Register/Register.screen';
 import Profile from '../screens/Profile/Profile.screen';
-import Icon from 'react-native-vector-icons/Ionicons';
+import MyPodcastMenu from '../screens/MyPodcastMenu/MyPodcastMenu.screen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,6 +47,11 @@ const MainNavigation = () => {
           name="HomeBase"
           options={{headerShown: false}}
           component={Home}
+        />
+        <Stack.Screen
+          name="MyPodcastMenuScreen"
+          options={{headerShown: false}}
+          component={MyPodcastMenu}
         />
         <Stack.Screen
           name="LoginScreen"
