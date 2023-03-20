@@ -19,7 +19,6 @@ const data = [
 
 const PodcastCarousel = () => {
   const carouselRef = useRef<ICarouselInstance>(null);
-  const right = useRef(null);
   const width = Dimensions.get('window').width;
 
   const handleLeft = () => {
@@ -35,26 +34,28 @@ const PodcastCarousel = () => {
 
   return (
     <GestureHandlerRootView style={styles.root}>
-      <Carousel
-        loop
-        vertical={false}
-        width={width}
-        height={width * 0.7}
-        style={{width: width}}
-        data={data}
-        scrollAnimationDuration={1000}
-        onSnapToItem={index => console.log('current index:', index)}
-        ref={carouselRef}
-        renderItem={({item, index}) => (
-          <View style={styles.item}>
-            <Image
-              source={item.img}
-              style={styles.itemImage}
-              alt="Best seller image"
-            />
-          </View>
-        )}
-      />
+      <View>
+        <Carousel
+          loop
+          vertical={false}
+          width={width}
+          height={width * 0.7}
+          style={{width: width}}
+          data={data}
+          scrollAnimationDuration={1000}
+          onSnapToItem={index => console.log('current index:', index)}
+          ref={carouselRef}
+          renderItem={({item}) => (
+            <View style={styles.item}>
+              <Image
+                source={item.img}
+                style={styles.itemImage}
+                alt="Best seller image"
+              />
+            </View>
+          )}
+        />
+      </View>
       <View style={{...styles.arrowIcon, ...styles.arrowLeft}}>
         <TouchableOpacity onPress={handleLeft} style={styles.iconBtn}>
           <Icon name="chevron-back-outline" size={30} color="white" />
