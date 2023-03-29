@@ -17,16 +17,13 @@ export default StyleSheet.create({
     paddingBottom: 40,
   },
   galeryItem: {
-    marginHorizontal: 15,
-    borderRadius: 30,
+    marginHorizontal: 5,
   },
   image: {
     height: width * 0.45,
     width: width * 0.6,
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 30,
-    overflow: 'hidden',
   },
   newBadge: {
     width: 60,

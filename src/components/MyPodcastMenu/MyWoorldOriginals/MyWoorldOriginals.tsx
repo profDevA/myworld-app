@@ -6,6 +6,7 @@ import styles from './style';
 
 export interface IVideo {
   ID: number;
+  USER_NAME: string;
   TITLE: string;
   DESCRIPTION: string;
   PODCAST: string;
