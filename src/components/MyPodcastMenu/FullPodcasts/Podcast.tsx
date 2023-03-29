@@ -35,28 +35,29 @@ const Podcast: React.FC<IPodcast> = ({video}) => {
         source={{uri: API_URL + video.IMAGE}}
         style={styles.image}
         resizeMode="cover">
-          <LinearGradient
-          start={{x: 0.255, y: 0}}
-          end={{x: 0.745, y: 1}}
+        <LinearGradient
+          start={{x: 0.225, y: 0}}
+          end={{x: 0.775, y: 1}}
           colors={gradColors}
-          locations={locations}>
-          <View style={styles.wrapper}>
-            <Text style={styles.title}>welcome to MyPodcast!!</Text>
-            <Text style={styles.description}>
-              create podcast to share with others...
-            </Text>
+          locations={locations}
+          style={styles.gradient}>
+          <View>
+            <View style={styles.userInfo}>
+              <Image
+                source={{uri: `${API_URL}/${profileImg}`}}
+                style={styles.profileImage}
+              />
+              <Text style={styles.username}>{video.USER_NAME}</Text>
+            </View>
+            <Text style={styles.itemTitle}>{video.TITLE}</Text>
+            <Text style={styles.description}>{video.DESCRIPTION}</Text>
+            <Image
+              source={require('../../../assets/images/mypodcastmenu/play-button.png')}
+              style={styles.playButton}
+            />
           </View>
         </LinearGradient>
-        <Image
-          source={require('../../../assets/images/mypodcastmenu/newPodcast.png')}
-          style={styles.newBadge}
-        />
-        <Text style={styles.itemTitle}>{video.TITLE}</Text>
       </ImageBackground>
-      <Image
-        source={{uri: `${API_URL}/${profileImg}`}}
-        style={styles.profileImage}
-      />
     </View>
   );
 };
