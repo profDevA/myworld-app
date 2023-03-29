@@ -2,14 +2,14 @@ import React from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {IVideo} from '../MyWoorldOriginals/MyWoorldOriginals';
-import VideoItem from './VideoItem';
+import Podcast from './Podcast';
 
-interface IVideoGallery {
+interface IFullPodcasts {
   title: string;
   videos: IVideo[];
 }
 
-const VideoGallery: React.FC<IVideoGallery> = ({title, videos}) => {
+const FullPodcasts: React.FC<IFullPodcasts> = ({title, videos}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -17,11 +17,11 @@ const VideoGallery: React.FC<IVideoGallery> = ({title, videos}) => {
       </View>
       <ScrollView horizontal persistentScrollbar style={styles.scrollView}>
         {videos.map(video => (
-          <VideoItem key={video.ID} video={video} />
+          <Podcast key={video.ID} video={video} />
         ))}
       </ScrollView>
     </View>
   );
 };
 
-export default VideoGallery;
+export default FullPodcasts;
