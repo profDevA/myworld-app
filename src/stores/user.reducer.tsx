@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createEntityAdapter,
 } from '@reduxjs/toolkit';
-import { getUser } from '../api/fakeApiUser';
+import {getUser} from '../api/fakeApiUser';
 
 export const fetchUser = createAsyncThunk('user/getUser', async () => {
   const response = await getUser();
@@ -33,7 +33,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { selectAll } = userAdapter.getSelectors(
+export const {selectAll} = userAdapter.getSelectors(
   (state: any) => state.members,
 );
 

@@ -1,50 +1,51 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import Video from 'react-native-video';
+import {API_URL} from '../../../constants';
 import styles from './style';
 
-const videos = [
-  {
-    title: 'video 1',
-    url: require('../../../assets/Podcasts/Podcast/63ecddc2d91ffA.mp4'),
-    poster: '../../../assets/Podcasts/Image/63ecddc2e6c23Jaques_Derrida.jpeg',
-  },
-  {
-    title: 'video 2',
-    url: require('../../../assets/Podcasts/Podcast/63eee2e366b36X.mp4'),
-    poster: '../../../assets/Podcasts/Image/63eee2e375549Ghosting.jpeg',
-  },
-];
+export interface IVideo {
+  ID: number;
+  TITLE: string;
+  DESCRIPTION: string;
+  PODCAST: string;
+  IMAGE: string;
+}
 
-const MyWoorldOriginals = () => {
+export interface IMyWoorldOriginals {
+  myWoorldOriginals: IVideo[];
+  title: string;
+}
+
+const MyWoorldOriginals: React.FC<IMyWoorldOriginals> = ({
+  myWoorldOriginals,
+  title,
+}) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>MyWoorld Originals</Text>
+        <Text style={styles.title}>{title}</Text>
       </View>
-      <View style={styles.videoContainer}>
-        {videos.map(video => (
+      <ScrollView style={styles.videoContainer} horizontal persistentScrollbar>
+        {myWoorldOriginals.map(video => (
           <Video
-            key={video.title}
-            source={video.url}
+            key={video.ID}
+            source={{uri: API_URL + video.PODCAST}}
             resizeMode="cover"
             controls
             style={styles.video}
             paused
-            // poster={
-            //   '../../../assets/Podcasts/Image/63ecddc2e6c23Jaques_Derrida.jpeg'
-            // }
+            poster={`${API_URL}${video.IMAGE}`}
             onLoadStart={() => {
-              console.log('onLoadStart', video.title, new Date());
+              console.log('onLoadStart', video.TITLE, new Date());
             }}
             onLoad={() => {
-              console.log('onLoad', video.title, new Date());
+              console.log('onLoad', video.TITLE, new Date());
             }}
             playInBackground={false}
           />
         ))}
-      </View>
-      <Text>asdf</Text>
+      </ScrollView>
     </View>
   );
 };
