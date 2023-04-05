@@ -4,6 +4,8 @@ import styles from './style';
 import {IVideo} from '../MyWoorldOriginals/MyWoorldOriginals';
 import {API_URL} from '../../../constants';
 import axios from 'axios';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import TrackPlayer from 'react-native-track-player';
 
 interface IVideoItem {
   video: IVideo;
@@ -25,8 +27,18 @@ const VideoItem: React.FC<IVideoItem> = ({video}) => {
     };
     fetchProfilePicture();
   }, [video.USER_NAME]);
+
+  const playPodcast = async (trackId?: string) => {
+    const tracks = await TrackPlayer.getQueue();
+    const trackIndex = tracks.findIndex(track => track.id === trackId);
+    TrackPlayer.skip(trackIndex);
+    TrackPlayer.skip(trackIndex);
+    TrackPlayer.play();
+  };
   return (
-    <View style={styles.galeryItem}>
+    <TouchableOpacity
+      style={styles.galeryItem}
+      onPress={() => playPodcast(video?.trackId)}>
       <ImageBackground
         source={{uri: API_URL + video.IMAGE}}
         style={styles.image}
@@ -41,7 +53,7 @@ const VideoItem: React.FC<IVideoItem> = ({video}) => {
         source={{uri: `${API_URL}/${profileImg}`}}
         style={styles.profileImage}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
