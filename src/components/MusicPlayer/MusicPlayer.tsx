@@ -26,6 +26,7 @@ const MusicPlayer: React.FC<IMusicPlayer> = () => {
   const [shuffled, setShuffled] = useState(false);
   //the value of the slider should be between 0 and 1
   const [sliderValue, setSliderValue] = useState(0);
+  const [volume, setVolume] = useState(0.5);
 
   useEffect(() => {
     // get all tracks
@@ -72,7 +73,7 @@ const MusicPlayer: React.FC<IMusicPlayer> = () => {
     if (!isSeeking && position && duration) {
       setSliderValue(position / duration);
     }
-  }, [position, duration, isSeeking]);
+  }, [position, duration]);
 
   const onPlayPausePress = () => {
     if (!isPlaying) {
@@ -91,9 +92,14 @@ const MusicPlayer: React.FC<IMusicPlayer> = () => {
   };
   //this function is called when the user stops sliding the seekbar
   const slidingCompleted = async (value: number) => {
-    await TrackPlayer.seekTo(value * duration);
     setSliderValue(value);
+    await TrackPlayer.seekTo(value * duration);
     setIsSeeking(false);
+  };
+
+  const volumeSlideFinished = async (value: number) => {
+    setVolume(value);
+    TrackPlayer.setVolume(value);
   };
 
   const onRepeatMode = () => {
@@ -191,8 +197,10 @@ const MusicPlayer: React.FC<IMusicPlayer> = () => {
           style={{width: 50, height: 30}}
           minimumValue={0}
           maximumValue={1}
+          value={volume}
           minimumTrackTintColor="lightseagreen"
           maximumTrackTintColor="#404040"
+          onSlidingComplete={volumeSlideFinished}
         />
       </View>
     </View>
