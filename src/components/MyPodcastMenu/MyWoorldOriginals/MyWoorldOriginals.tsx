@@ -11,6 +11,7 @@ export interface IVideo {
   DESCRIPTION: string;
   PODCAST: string;
   IMAGE: string;
+  trackId?: string;
 }
 
 export interface IMyWoorldOriginals {
@@ -37,12 +38,12 @@ const MyWoorldOriginals: React.FC<IMyWoorldOriginals> = ({
             style={styles.video}
             paused
             poster={`${API_URL}${video.IMAGE}`}
-            onLoadStart={() => {
-              console.log('onLoadStart', video.TITLE, new Date());
-            }}
-            onLoad={() => {
-              console.log('onLoad', video.TITLE, new Date());
-            }}
+            // onLoadStart={() => {
+            //   console.log('onLoadStart', video.TITLE, new Date());
+            // }}
+            // onLoad={() => {
+            //   console.log('onLoad', video.TITLE, new Date());
+            // }}
             playInBackground={false}
           />
         ))}

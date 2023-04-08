@@ -1,8 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import axios from 'axios';
 import styles from './MyPodcastMenu.style';
-import {ScrollView} from 'react-native-gesture-handler';
 import {API_URL} from '../../constants';
 import MyPodcastMenuHeader from '../../components/MyPodcastMenu/MyPodcastMenuHeader';
 import PodcastMenuBanner from '../../components/MyPodcastMenu/Banner/PodcastMenuBanner';
@@ -11,6 +16,26 @@ import VideoGallery from '../../components/MyPodcastMenu/VideoGallery/VideoGalle
 import MyWoorldOriginals from '../../components/MyPodcastMenu/MyWoorldOriginals/MyWoorldOriginals';
 import {IVideo} from '../../components/MyPodcastMenu/MyWoorldOriginals/MyWoorldOriginals';
 import FullPodcasts from '../../components/MyPodcastMenu/FullPodcasts/FullPodcasts';
+import TrackPlayer, {State} from 'react-native-track-player';
+import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
+
+// const tracks = [
+//   {
+//     id: 1,
+//     url: require('../../assets/tracks/file_example_MP3_1MG.mp3'),
+//     title: 'File example 1M',
+//   },
+//   {
+//     id: 2,
+//     url: require('../../assets/tracks/file_example_MP3_700KB.mp3'),
+//     title: 'File example 700K',
+//   },
+//   {
+//     id: 3,
+//     url: require('../../assets/Podcasts/Podcast/63ecddc2d91ffA.mp4'),
+//     title: 'Sonador eterno letra',
+//   },
+// ];
 
 const MyPodcastMenuScreen = ({navigation}: any) => {
   const [myWoorldOriginals, setMyWoorldOriginals] = useState<IVideo[]>([]);
@@ -25,129 +50,195 @@ const MyPodcastMenuScreen = ({navigation}: any) => {
   const [topPersonals, setTopPersonals] = useState<IVideo[]>([]);
   const [topChistes, setTopchistes] = useState<IVideo[]>([]);
   const [fullPodcasts, setFullPodcasts] = useState<IVideo[]>([]);
+  const [initialized, setInitialized] = useState(false);
+
+  const setUpTrackPlayer = async () => {
+    try {
+      await TrackPlayer.setupPlayer();
+      setInitialized(true);
+    } catch (e) {
+      console.log('error ading track list', e);
+    }
+  };
 
   useEffect(() => {
-    const fetchOriginals = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_originals.php`,
-      );
-      setMyWoorldOriginals(data);
-    };
-    fetchOriginals();
+    // TrackPlayer.updateOptions({
+    //   stopWithApp: false,
+    //   capabilities: [TrackPlayer.CAPABILITY_PLAY, TrackPlayer.CAPABILITY_PAUSE],
+    //   compactCapabilities: [
+    //     TrackPlayer.CAPABILITY_PLAY,
+    //     TrackPlayer.CAPABILITY_PAUSE,
+    //   ],
+    // });
+    // return () => TrackPlayer.reset();
   }, []);
 
-  useEffect(() => {
-    const fetchTopVideoClips = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_videoclips.php`,
-      );
-      setTopVideoClips(data);
-    };
-    fetchTopVideoClips();
-  }, []);
+  const convertToTrack = (videos: IVideo[], idKey: string) => {
+    return videos.map(video => ({
+      id: `${idKey}-${video.ID}`,
+      url: `${API_URL}/${video.PODCAST}`,
+      title: video.TITLE,
+      artist: video.USER_NAME,
+      artwork: `${API_URL}/${video.IMAGE}`,
+      discription: video.DESCRIPTION,
+    }));
+  };
+
+  const convertToVideo = (videos: IVideo[], idKey: string) => {
+    return videos.map(video => ({
+      ...video,
+      trackId: `${idKey}-${video.ID}`,
+    }));
+  };
 
   useEffect(() => {
-    const fetchTrendingClips = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_trending_clips.php`,
-      );
-      if (!data.status) {
-        setTrendingClips(data);
+    const fetchAllData = async () => {
+      try {
+        await TrackPlayer.setupPlayer();
+
+        const [
+          myWoorldOriginalsResponse,
+          topVideoClipsResponse,
+          trendingClipsResponse,
+          topIncognitosResponse,
+          mostListenedClipsResponse,
+          reflexionesResponse,
+          espiritualsResponse,
+          creepiesResponse,
+          emotionalsResponse,
+          topPersonalsResponse,
+          topChistesResponse,
+          fullPodcastsResponse,
+        ] = await Promise.all([
+          axios.get(`${API_URL}API/MyPodcastMenu/get_originals.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_videoclips.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_trending_clips.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_top_incognitos.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_most_listened_clips.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_reflexiones.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_espirituals.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_creepies.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_top_emotionals.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_top_personals.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_top_chistes.php`),
+          axios.get(`${API_URL}API/MyPodcastMenu/get_full_podcasts.php`),
+        ]);
+
+        const trendingClipsTracks = convertToTrack(
+          trendingClipsResponse.data,
+          'track-trendingclips',
+        );
+        const trendingClipsVideos = convertToVideo(
+          trendingClipsResponse.data,
+          'track-trendingclips',
+        );
+        const topIncognitosTracks = convertToTrack(
+          topIncognitosResponse.data,
+          'track-incognitos',
+        );
+        const topIncognitosVideos = convertToVideo(
+          topIncognitosResponse.data,
+          'track-incognitos',
+        );
+        const mostListenedClipsTracks = convertToTrack(
+          mostListenedClipsResponse.data,
+          'track-mostlistenedclips',
+        );
+        const mostListenedClipsVideos = convertToVideo(
+          mostListenedClipsResponse.data,
+          'track-mostlistenedclips',
+        );
+        const reflexionesTracks = convertToTrack(
+          reflexionesResponse.data,
+          'track-reflexiones',
+        );
+        const reflexionesVideos = convertToVideo(
+          reflexionesResponse.data,
+          'track-reflexiones',
+        );
+        const espiritualsTracks = convertToTrack(
+          espiritualsResponse.data,
+          'track-espirituals',
+        );
+        const espiritualsVideos = convertToVideo(
+          espiritualsResponse.data,
+          'track-espirituals',
+        );
+        const creepiesTracks = convertToTrack(
+          creepiesResponse.data,
+          'track-creepies',
+        );
+        const creepiesVideos = convertToVideo(
+          creepiesResponse.data,
+          'track-creepies',
+        );
+        const topPersonalsTracks = convertToTrack(
+          topPersonalsResponse.data,
+          'track-topPersonals',
+        );
+        const topPersonalsVideos = convertToVideo(
+          topPersonalsResponse.data,
+          'track-topPersonals',
+        );
+        const emotionalsTracks = convertToTrack(
+          emotionalsResponse.data,
+          'track-emotionals',
+        );
+        const emotionalsVideos = convertToVideo(
+          emotionalsResponse.data,
+          'track-emotionals',
+        );
+        const topChistesTracks = convertToTrack(
+          topChistesResponse.data,
+          'track-chistes',
+        );
+        const topChistesVideos = convertToVideo(
+          topChistesResponse.data,
+          'track-chistes',
+        );
+        const fullPodcastsTracks = convertToTrack(
+          fullPodcastsResponse.data,
+          'track-fullpodcasts',
+        );
+        const fullPodcastsVideos = convertToVideo(
+          fullPodcastsResponse.data,
+          'track-fullpodcasts',
+        );
+
+        await TrackPlayer.add(trendingClipsTracks);
+        await TrackPlayer.add(topIncognitosTracks);
+        await TrackPlayer.add(mostListenedClipsTracks);
+        await TrackPlayer.add(reflexionesTracks);
+        await TrackPlayer.add(espiritualsTracks);
+        await TrackPlayer.add(creepiesTracks);
+        await TrackPlayer.add(emotionalsTracks);
+        await TrackPlayer.add(topPersonalsTracks);
+        await TrackPlayer.add(topChistesTracks);
+        await TrackPlayer.add(fullPodcastsTracks);
+        await TrackPlayer.play();
+
+        setMyWoorldOriginals(myWoorldOriginalsResponse.data);
+        setTopVideoClips(topVideoClipsResponse.data);
+        setTrendingClips(trendingClipsVideos);
+        setTopIncognitos(topIncognitosVideos);
+        setMostLstenedClips(mostListenedClipsVideos);
+        setReflexiones(reflexionesVideos);
+        setEspirituals(espiritualsVideos);
+        setCreepies(creepiesVideos);
+        setEmotionals(emotionalsVideos);
+        setTopPersonals(topPersonalsVideos);
+        setTopchistes(topChistesVideos);
+        setFullPodcasts(fullPodcastsVideos);
+        setInitialized(true);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     };
-    fetchTrendingClips();
-  }, []);
 
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_top_incognitos.php`,
-      );
-      if (!data.status) {
-        setTopIncognitos(data);
-      }
+    fetchAllData();
+    return () => {
+      TrackPlayer.reset();
     };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_most_listened_clips.php`,
-      );
-      setMostLstenedClips(data);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_reflexiones.php`,
-      );
-      setReflexiones(data);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_espirituals.php`,
-      );
-      setEspirituals(data);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_creepies.php`,
-      );
-      setCreepies(data);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_top_emotionals.php`,
-      );
-      setEmotionals(data);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_top_personals.php`,
-      );
-      setTopPersonals(data);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_top_chistes.php`,
-      );
-      setTopchistes(data);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const {data} = await axios.get(
-        `${API_URL}API/MyPodcastMenu/get_full_podcasts.php`,
-      );
-      setFullPodcasts(data);
-    };
-    fetch();
   }, []);
 
   return (
@@ -202,6 +293,7 @@ const MyPodcastMenuScreen = ({navigation}: any) => {
           <FullPodcasts title="Full Podcasts" videos={fullPodcasts} />
         )}
       </ScrollView>
+      {initialized && <MusicPlayer />}
     </SafeAreaView>
   );
 };

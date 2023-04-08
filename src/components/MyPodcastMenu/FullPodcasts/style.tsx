@@ -25,21 +25,38 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  newBadge: {
-    width: 60,
-    height: 60,
+  playButton: {
+    width: 25,
+    height: 25,
+    marginTop: 10,
   },
   itemTitle: {
-    fontSize: 20,
+    fontSize: 12,
+    lineHeight: 18,
     color: '#fff',
   },
+  description: {
+    color: '#fff',
+    fontSize: 9,
+    width: '40%',
+  },
   profileImage: {
-    width: 60,
-    height: 60,
-    position: 'absolute',
-    bottom: -30,
-    left: 30,
-    zIndex: 9999,
+    width: 30,
+    height: 30,
     borderRadius: 30,
+  },
+  gradient: {
+    height: '100%',
+    width: '100%',
+    padding: 8,
+  },
+  userInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  username: {
+    color: '#fff',
+    fontSize: 13,
   },
 });
