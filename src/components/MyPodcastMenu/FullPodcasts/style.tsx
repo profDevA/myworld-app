@@ -3,7 +3,9 @@ import {Dimensions, StyleSheet} from 'react-native';
 const width = Dimensions.get('window').width;
 
 export default StyleSheet.create({
-  container: {},
+  container: {
+    marginBottom: 100,
+  },
   title: {
     fontSize: 23,
     fontFamily: 'Audiowide',

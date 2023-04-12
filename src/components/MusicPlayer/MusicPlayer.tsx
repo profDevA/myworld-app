@@ -12,6 +12,7 @@ import _ from 'lodash';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from '@react-native-community/slider';
 import styles from './style';
+import {current} from '@reduxjs/toolkit';
 
 export interface IMusicPlayer {}
 
@@ -76,6 +77,7 @@ const MusicPlayer: React.FC<IMusicPlayer> = () => {
   }, [position, duration]);
 
   const onPlayPausePress = () => {
+    console.log('----');
     if (!isPlaying) {
       TrackPlayer.play();
     } else {
@@ -134,6 +136,8 @@ const MusicPlayer: React.FC<IMusicPlayer> = () => {
   //     2,
   //   ),
   // );
+
+  console.log('==', isPlaying, currentTrack);
 
   const artImg =
     (currentTrack?.artwork as string) ||

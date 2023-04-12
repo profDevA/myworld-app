@@ -1,10 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, ImageBackground, Image} from 'react-native';
+import {
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import styles from './style';
 import {IVideo} from '../MyWoorldOriginals/MyWoorldOriginals';
 import {API_URL} from '../../../constants';
 import axios from 'axios';
 import LinearGradient from 'react-native-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
 
 interface IPodcast {
   video: IVideo;
@@ -15,6 +22,7 @@ const locations = [0.5, 0.5];
 
 const Podcast: React.FC<IPodcast> = ({video}) => {
   const [profileImg, setProifleImg] = useState('');
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchProfilePicture = async () => {
@@ -29,6 +37,12 @@ const Podcast: React.FC<IPodcast> = ({video}) => {
     };
     fetchProfilePicture();
   }, [video.USER_NAME]);
+  const goToPodcast = () => {
+    navigation.navigate('PodcastScreen', {
+      ...video,
+      profileImg,
+    });
+  };
   return (
     <View style={styles.galeryItem}>
       <ImageBackground
@@ -51,10 +65,12 @@ const Podcast: React.FC<IPodcast> = ({video}) => {
             </View>
             <Text style={styles.itemTitle}>{video.TITLE}</Text>
             <Text style={styles.description}>{video.DESCRIPTION}</Text>
-            <Image
-              source={require('../../../assets/images/mypodcastmenu/play-button.png')}
-              style={styles.playButton}
-            />
+            <TouchableOpacity onPress={goToPodcast}>
+              <Image
+                source={require('../../../assets/images/mypodcastmenu/play-button.png')}
+                style={styles.playButton}
+              />
+            </TouchableOpacity>
           </View>
         </LinearGradient>
       </ImageBackground>

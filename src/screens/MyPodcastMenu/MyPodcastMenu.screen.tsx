@@ -19,24 +19,6 @@ import FullPodcasts from '../../components/MyPodcastMenu/FullPodcasts/FullPodcas
 import TrackPlayer, {State} from 'react-native-track-player';
 import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
 
-// const tracks = [
-//   {
-//     id: 1,
-//     url: require('../../assets/tracks/file_example_MP3_1MG.mp3'),
-//     title: 'File example 1M',
-//   },
-//   {
-//     id: 2,
-//     url: require('../../assets/tracks/file_example_MP3_700KB.mp3'),
-//     title: 'File example 700K',
-//   },
-//   {
-//     id: 3,
-//     url: require('../../assets/Podcasts/Podcast/63ecddc2d91ffA.mp4'),
-//     title: 'Sonador eterno letra',
-//   },
-// ];
-
 const MyPodcastMenuScreen = ({navigation}: any) => {
   const [myWoorldOriginals, setMyWoorldOriginals] = useState<IVideo[]>([]);
   const [topVideoClips, setTopVideoClips] = useState<IVideo[]>([]);
@@ -51,27 +33,6 @@ const MyPodcastMenuScreen = ({navigation}: any) => {
   const [topChistes, setTopchistes] = useState<IVideo[]>([]);
   const [fullPodcasts, setFullPodcasts] = useState<IVideo[]>([]);
   const [initialized, setInitialized] = useState(false);
-
-  const setUpTrackPlayer = async () => {
-    try {
-      await TrackPlayer.setupPlayer();
-      setInitialized(true);
-    } catch (e) {
-      console.log('error ading track list', e);
-    }
-  };
-
-  useEffect(() => {
-    // TrackPlayer.updateOptions({
-    //   stopWithApp: false,
-    //   capabilities: [TrackPlayer.CAPABILITY_PLAY, TrackPlayer.CAPABILITY_PAUSE],
-    //   compactCapabilities: [
-    //     TrackPlayer.CAPABILITY_PLAY,
-    //     TrackPlayer.CAPABILITY_PAUSE,
-    //   ],
-    // });
-    // return () => TrackPlayer.reset();
-  }, []);
 
   const convertToTrack = (videos: IVideo[], idKey: string) => {
     return videos.map(video => ({
