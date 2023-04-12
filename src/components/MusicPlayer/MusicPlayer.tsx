@@ -12,7 +12,6 @@ import _ from 'lodash';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from '@react-native-community/slider';
 import styles from './style';
-import {current} from '@reduxjs/toolkit';
 
 export interface IMusicPlayer {}
 
