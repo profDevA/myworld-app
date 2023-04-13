@@ -40,7 +40,7 @@ const MyPodcastMenuScreen = ({navigation}: any) => {
       url: `${API_URL}/${video.PODCAST}`,
       title: video.TITLE,
       artist: video.USER_NAME,
-      artwork: `${API_URL}/${video.IMAGE}`,
+      artwork: `${API_URL}${video.IMAGE}`,
       discription: video.DESCRIPTION,
     }));
   };

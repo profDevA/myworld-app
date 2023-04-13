@@ -76,7 +76,6 @@ const MusicPlayer: React.FC<IMusicPlayer> = () => {
   }, [position, duration]);
 
   const onPlayPausePress = () => {
-    console.log('----');
     if (!isPlaying) {
       TrackPlayer.play();
     } else {
@@ -135,8 +134,6 @@ const MusicPlayer: React.FC<IMusicPlayer> = () => {
   //     2,
   //   ),
   // );
-
-  console.log('==', isPlaying, currentTrack);
 
   const artImg =
     (currentTrack?.artwork as string) ||

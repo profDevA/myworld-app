@@ -45,11 +45,6 @@ const MainNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen
-          name="PodcastScreen"
-          options={{headerShown: false}}
-          component={PodcastScreen}
-        />
-        <Stack.Screen
           name="HomeBase"
           options={{headerShown: false}}
           component={Home}
@@ -68,6 +63,11 @@ const MainNavigation = () => {
           name="RegisterScreen"
           options={{headerShown: false}}
           component={Register}
+        />
+        <Stack.Screen
+          name="PodcastScreen"
+          options={{headerShown: false}}
+          component={PodcastScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
