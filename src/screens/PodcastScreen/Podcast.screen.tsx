@@ -26,6 +26,7 @@ const PodcastScreen = ({route}: any) => {
   const [volume, setVolume] = useState(1);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [profileImage, setProfileImage] = useState('');
+  const [rate, setRate] = useState(1);
   const isPlaying = playerState === State.Playing;
 
   useEffect(() => {
@@ -86,13 +87,32 @@ const PodcastScreen = ({route}: any) => {
   const skipToPreviousTrack = () => TrackPlayer.skipToPrevious();
 
   const toggleVolume = () => {
-    console.log(route.params);
     if (volume) {
       TrackPlayer.setVolume(0);
       setVolume(0);
     } else {
       TrackPlayer.setVolume(1);
       setVolume(1);
+    }
+  };
+
+  const toggleForward = () => {
+    if (rate === 1.2) {
+      TrackPlayer.setRate(1);
+      setRate(1);
+    } else {
+      TrackPlayer.setRate(1.2);
+      setRate(1.2);
+    }
+  };
+
+  const toggleBack = () => {
+    if (rate === 0.8) {
+      TrackPlayer.setRate(1);
+      setRate(1);
+    } else {
+      TrackPlayer.setRate(0.8);
+      setRate(0.8);
     }
   };
 
@@ -124,9 +144,9 @@ const PodcastScreen = ({route}: any) => {
         </ImageBackground>
       </View>
       <View style={styles.controls}>
-        <TouchableOpacity style={styles.button}>
+        {/* <TouchableOpacity style={styles.button}>
           <Icon name="add-circle-sharp" color="#FFF" size={25} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity style={styles.button}>
           <Icon
             name="play-skip-back-sharp"
@@ -136,7 +156,12 @@ const PodcastScreen = ({route}: any) => {
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Icon name="play-back-sharp" color="#FFF" size={25} />
+          <Icon
+            name="play-back-sharp"
+            color="#FFF"
+            size={25}
+            onPress={toggleBack}
+          />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={onPlayPausePress}>
           <Icon
@@ -145,7 +170,7 @@ const PodcastScreen = ({route}: any) => {
             size={25}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={toggleForward}>
           <Icon name="play-forward-sharp" color="#FFF" size={25} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
