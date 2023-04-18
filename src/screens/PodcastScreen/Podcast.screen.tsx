@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   View,
   TouchableOpacity,
   Text,
@@ -34,7 +33,8 @@ const PodcastScreen = ({route}: any) => {
       const tracks = await TrackPlayer.getQueue();
       const trackIndex = tracks.findIndex(track => track.id === trackId);
       setCurrentTrack(tracks[trackIndex]);
-      await TrackPlayer.skip(trackIndex);
+      TrackPlayer.skip(trackIndex);
+      TrackPlayer.skip(trackIndex);
       TrackPlayer.play();
     };
     getTrack();
@@ -120,33 +120,41 @@ const PodcastScreen = ({route}: any) => {
     <SafeAreaView style={styles.SafeAreaView2}>
       <MyPodcastMenuHeader />
       <View style={styles.container}>
-        <ImageBackground
-          source={{uri: `${currentTrack?.artwork}`}}
-          style={styles.background}>
-          <View style={styles.content}>
-            <Text style={styles.title}>{currentTrack?.title}</Text>
-            <Text style={styles.description}>{currentTrack?.description}</Text>
-            <View style={styles.centerBlock}>
+        {currentTrack && (
+          <ImageBackground
+            source={{uri: `${currentTrack?.artwork}`}}
+            style={styles.background}>
+            <View style={styles.content}>
               <Image
-                source={{uri: `${API_URL}/${profileImage}`}}
-                style={styles.profileImage}
+                source={require('../../assets/images/icons/share.png')}
+                style={styles.shareIcon}
               />
-              <Image
-                source={require('../../assets/images/icons/hostTalking.gif')}
-                style={styles.hostTalking}
-              />
-              <Image
-                source={require('../../assets/images/icons/microphone.png')}
-                style={styles.microphone}
-              />
+              <Text style={styles.title}>{currentTrack?.title}</Text>
+              <Text style={styles.description}>
+                {currentTrack?.description}
+              </Text>
+              <View style={styles.centerBlock}>
+                <Image
+                  source={{uri: `${API_URL}/${profileImage}`}}
+                  style={styles.profileImage}
+                />
+                <Image
+                  source={require('../../assets/images/icons/hostTalking.gif')}
+                  style={styles.hostTalking}
+                />
+                <Image
+                  source={require('../../assets/images/icons/microphone.png')}
+                  style={styles.microphone}
+                />
+              </View>
             </View>
-          </View>
-        </ImageBackground>
+          </ImageBackground>
+        )}
       </View>
       <View style={styles.controls}>
-        {/* <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button}>
           <Icon name="add-circle-sharp" color="#FFF" size={25} />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Icon
             name="play-skip-back-sharp"

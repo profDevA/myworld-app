@@ -69,4 +69,11 @@ export default StyleSheet.create({
     padding: 7,
     marginHorizontal: 4,
   },
+  shareIcon: {
+    width: 50,
+    height: 50,
+    position: 'absolute',
+    top: 20,
+    left: 20,
+  },
 });
