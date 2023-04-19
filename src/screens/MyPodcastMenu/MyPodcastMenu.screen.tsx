@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import {SafeAreaView, ScrollView} from 'react-native';
 import axios from 'axios';
+import {useSelector, useDispatch} from 'react-redux';
 import styles from './MyPodcastMenu.style';
 import {API_URL} from '../../constants';
 import MyPodcastMenuHeader from '../../components/MyPodcastMenu/MyPodcastMenuHeader';
@@ -16,10 +11,17 @@ import VideoGallery from '../../components/MyPodcastMenu/VideoGallery/VideoGalle
 import MyWoorldOriginals from '../../components/MyPodcastMenu/MyWoorldOriginals/MyWoorldOriginals';
 import {IVideo} from '../../components/MyPodcastMenu/MyWoorldOriginals/MyWoorldOriginals';
 import FullPodcasts from '../../components/MyPodcastMenu/FullPodcasts/FullPodcasts';
-import TrackPlayer, {State} from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
+import type {RootState} from '../../stores';
+import {toggleInitialized} from '../../stores/trackPlayer.reducer';
 
 const MyPodcastMenuScreen = ({navigation}: any) => {
+  const dispatch = useDispatch();
+  const playerInitialized = useSelector(
+    (state: RootState) => state.trackPlayer.initialized,
+  );
+
   const [myWoorldOriginals, setMyWoorldOriginals] = useState<IVideo[]>([]);
   const [topVideoClips, setTopVideoClips] = useState<IVideo[]>([]);
   const [trendingClips, setTrendingClips] = useState<IVideo[]>([]);
@@ -55,7 +57,10 @@ const MyPodcastMenuScreen = ({navigation}: any) => {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        await TrackPlayer.setupPlayer();
+        if (!playerInitialized) {
+          await TrackPlayer.setupPlayer();
+          dispatch(toggleInitialized());
+        }
 
         const [
           myWoorldOriginalsResponse,
