@@ -16,6 +16,15 @@ export default StyleSheet.create({
     height: 40,
     marginLeft: 10,
   },
+  logo: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  logoText: {
+    fontSize: 30,
+    color: '#fff',
+    paddingLeft: 5,
+  },
   rightIcons: {
     flexDirection: 'row',
   },
