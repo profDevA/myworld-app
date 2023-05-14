@@ -31,8 +31,8 @@ const VideoItem: React.FC<IVideoItem> = ({video}) => {
   const playPodcast = async (trackId?: string) => {
     const tracks = await TrackPlayer.getQueue();
     const trackIndex = tracks.findIndex(track => track.id === trackId);
-    TrackPlayer.skip(trackIndex);
-    TrackPlayer.skip(trackIndex);
+    await TrackPlayer.skip(trackIndex);
+    await TrackPlayer.skip(trackIndex);
     TrackPlayer.play();
   };
   return (

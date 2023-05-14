@@ -8,6 +8,7 @@ import Login from '../screens/Login/Login.screen';
 import Register from '../screens/Register/Register.screen';
 import Profile from '../screens/Profile/Profile.screen';
 import MyPodcastMenu from '../screens/MyPodcastMenu/MyPodcastMenu.screen';
+import PodcastScreen from '../screens/PodcastScreen/Podcast.screen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,6 +63,11 @@ const MainNavigation = () => {
           name="RegisterScreen"
           options={{headerShown: false}}
           component={Register}
+        />
+        <Stack.Screen
+          name="PodcastScreen"
+          options={{headerShown: false}}
+          component={PodcastScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -10,9 +10,16 @@ export default StyleSheet.create({
     gap: 10,
     flexWrap: 'wrap',
   },
+  title: {
+    color: 'crimson',
+    fontSize: 25,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+  },
   gridItem: {
-    width: (width - 50) / 2,
-    height: width * 0.6,
+    width: (width - 70) / 3,
+    height: width * 0.36,
     backgroundColor: 'white',
   },
   itemImage: {

@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import {SafeAreaView, ScrollView} from 'react-native';
 import axios from 'axios';
+import {useSelector, useDispatch} from 'react-redux';
 import styles from './MyPodcastMenu.style';
 import {API_URL} from '../../constants';
 import MyPodcastMenuHeader from '../../components/MyPodcastMenu/MyPodcastMenuHeader';
@@ -16,28 +11,17 @@ import VideoGallery from '../../components/MyPodcastMenu/VideoGallery/VideoGalle
 import MyWoorldOriginals from '../../components/MyPodcastMenu/MyWoorldOriginals/MyWoorldOriginals';
 import {IVideo} from '../../components/MyPodcastMenu/MyWoorldOriginals/MyWoorldOriginals';
 import FullPodcasts from '../../components/MyPodcastMenu/FullPodcasts/FullPodcasts';
-import TrackPlayer, {State} from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
-
-// const tracks = [
-//   {
-//     id: 1,
-//     url: require('../../assets/tracks/file_example_MP3_1MG.mp3'),
-//     title: 'File example 1M',
-//   },
-//   {
-//     id: 2,
-//     url: require('../../assets/tracks/file_example_MP3_700KB.mp3'),
-//     title: 'File example 700K',
-//   },
-//   {
-//     id: 3,
-//     url: require('../../assets/Podcasts/Podcast/63ecddc2d91ffA.mp4'),
-//     title: 'Sonador eterno letra',
-//   },
-// ];
+import type {RootState} from '../../stores';
+import {toggleInitialized} from '../../stores/trackPlayer.reducer';
 
 const MyPodcastMenuScreen = ({navigation}: any) => {
+  const dispatch = useDispatch();
+  const playerInitialized = useSelector(
+    (state: RootState) => state.trackPlayer.initialized,
+  );
+
   const [myWoorldOriginals, setMyWoorldOriginals] = useState<IVideo[]>([]);
   const [topVideoClips, setTopVideoClips] = useState<IVideo[]>([]);
   const [trendingClips, setTrendingClips] = useState<IVideo[]>([]);
@@ -52,35 +36,14 @@ const MyPodcastMenuScreen = ({navigation}: any) => {
   const [fullPodcasts, setFullPodcasts] = useState<IVideo[]>([]);
   const [initialized, setInitialized] = useState(false);
 
-  const setUpTrackPlayer = async () => {
-    try {
-      await TrackPlayer.setupPlayer();
-      setInitialized(true);
-    } catch (e) {
-      console.log('error ading track list', e);
-    }
-  };
-
-  useEffect(() => {
-    // TrackPlayer.updateOptions({
-    //   stopWithApp: false,
-    //   capabilities: [TrackPlayer.CAPABILITY_PLAY, TrackPlayer.CAPABILITY_PAUSE],
-    //   compactCapabilities: [
-    //     TrackPlayer.CAPABILITY_PLAY,
-    //     TrackPlayer.CAPABILITY_PAUSE,
-    //   ],
-    // });
-    // return () => TrackPlayer.reset();
-  }, []);
-
   const convertToTrack = (videos: IVideo[], idKey: string) => {
     return videos.map(video => ({
       id: `${idKey}-${video.ID}`,
       url: `${API_URL}/${video.PODCAST}`,
       title: video.TITLE,
       artist: video.USER_NAME,
-      artwork: `${API_URL}/${video.IMAGE}`,
-      discription: video.DESCRIPTION,
+      artwork: `${API_URL}${video.IMAGE}`,
+      description: video.DESCRIPTION,
     }));
   };
 
@@ -94,7 +57,10 @@ const MyPodcastMenuScreen = ({navigation}: any) => {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        await TrackPlayer.setupPlayer();
+        if (!playerInitialized) {
+          await TrackPlayer.setupPlayer();
+          dispatch(toggleInitialized());
+        }
 
         const [
           myWoorldOriginalsResponse,

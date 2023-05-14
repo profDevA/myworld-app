@@ -20,15 +20,18 @@ const Header = () => {
     <React.Fragment>
       <View style={styles.container}>
         <View>
-          <TouchableOpacity onPress={() => naviation.navigate('LoginScreen')}>
+          <TouchableOpacity
+            onPress={() => naviation.navigate('LoginScreen')}
+            style={styles.logo}>
             <Image
               source={require('../../assets/images/logo-x.png')}
               style={styles.logoImage}
             />
+            <Text style={styles.logoText}>MyWoorld</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.rightIcons}>
-          <Image
+          {/* <Image
             source={require('../../assets/images/trending-topic.png')}
             style={styles.headerIcons}
           />
@@ -39,7 +42,7 @@ const Header = () => {
           <Image
             source={require('../../assets/images/myTVicon.png')}
             style={styles.headerIcons}
-          />
+          /> */}
           <TouchableOpacity
             onPress={() => naviation.navigate('MyPodcastMenuScreen')}>
             <Image
@@ -47,14 +50,14 @@ const Header = () => {
               style={styles.headerIcons}
             />
           </TouchableOpacity>
-          <Image
+          {/* <Image
             source={require('../../assets/images/MyMusic.png')}
             style={styles.headerIcons}
           />
           <Image
             source={require('../../assets/images/Snap.png')}
             style={styles.headerIcons}
-          />
+          /> */}
         </View>
       </View>
       <LinearGradient

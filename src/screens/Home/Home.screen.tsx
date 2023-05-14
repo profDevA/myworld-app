@@ -18,7 +18,7 @@ const Home = ({navigation}: any) => {
       <Header />
       <ScrollView>
         <HomeBanner />
-        <BestSellors />
+        {/* <BestSellors /> */}
         <Magazines />
       </ScrollView>
     </SafeAreaView>

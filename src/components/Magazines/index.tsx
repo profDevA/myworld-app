@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import styles from './style';
 
 const magazines = [
@@ -74,12 +74,15 @@ const magazines = [
 ];
 const Magazines = () => {
   return (
-    <View style={styles.container}>
-      {magazines.map((magazine, index) => (
-        <View key={index} style={styles.gridItem}>
-          <Image source={magazine.image} style={styles.itemImage} />
-        </View>
-      ))}
+    <View>
+      <Text style={styles.title}>Posts by section coming soon</Text>
+      <View style={styles.container}>
+        {magazines.map((magazine, index) => (
+          <View key={index} style={styles.gridItem}>
+            <Image source={magazine.image} style={styles.itemImage} />
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
