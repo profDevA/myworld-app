@@ -14,14 +14,14 @@ const Header = () => {
     '#4AFF47',
     '#00F4F0',
   ];
-  const naviation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <React.Fragment>
       <View style={styles.container}>
         <View>
           <TouchableOpacity
-            onPress={() => naviation.navigate('LoginScreen')}
+            onPress={() => navigation.navigate('LoginScreen')}
             style={styles.logo}>
             <Image
               source={require('../../assets/images/logo-x.png')}
@@ -34,17 +34,19 @@ const Header = () => {
           {/* <Image
             source={require('../../assets/images/trending-topic.png')}
             style={styles.headerIcons}
-          />
-          <Image
-            source={require('../../assets/images/newsIcon.png')}
-            style={styles.headerIcons}
-          />
-          <Image
+          /> */}
+          <TouchableOpacity onPress={() => navigation.navigate('NewsScreen')}>
+            <Image
+              source={require('../../assets/images/newsIcon.png')}
+              style={styles.headerIcons}
+            />
+          </TouchableOpacity>
+          {/* <Image
             source={require('../../assets/images/myTVicon.png')}
             style={styles.headerIcons}
           /> */}
           <TouchableOpacity
-            onPress={() => naviation.navigate('MyPodcastMenuScreen')}>
+            onPress={() => navigation.navigate('MyPodcastMenuScreen')}>
             <Image
               source={require('../../assets/images/receiver.png')}
               style={styles.headerIcons}

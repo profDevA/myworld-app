@@ -8,6 +8,7 @@ import Login from '../screens/Login/Login.screen';
 import Register from '../screens/Register/Register.screen';
 import Profile from '../screens/Profile/Profile.screen';
 import MyPodcastMenu from '../screens/MyPodcastMenu/MyPodcastMenu.screen';
+import NewsScreen from '../screens/News/News.screen';
 import PodcastScreen from '../screens/PodcastScreen/Podcast.screen';
 
 const Stack = createNativeStackNavigator();
@@ -68,6 +69,11 @@ const MainNavigation = () => {
           name="PodcastScreen"
           options={{headerShown: false}}
           component={PodcastScreen}
+        />
+        <Stack.Screen
+          name="NewsScreen"
+          options={{headerShown: false}}
+          component={NewsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
